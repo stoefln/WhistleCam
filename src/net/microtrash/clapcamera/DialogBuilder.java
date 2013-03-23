@@ -1,5 +1,5 @@
 /*******************************************************************************
- * OverlayCamera
+ * ClapCamera
  *
  * Copyright 2013 by Stephan Petzl
  * http://www.stephanpetzl.com
@@ -17,14 +17,14 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package net.microtrash.overlaycamera;
+package net.microtrash.clapcamera;
 
 import java.util.HashMap;
 
 import com.crittercism.NewFeedbackSpringboardActivity;
 import com.flurry.android.FlurryAgent;
 
-import net.microtrash.overlaycamera.R;
+import net.microtrash.clapcamera.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -46,12 +46,12 @@ public class DialogBuilder {
 		parameters.put("feature", feature);
 		FlurryAgent.logEvent("showProFeatureDialog",parameters);
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		builder.setMessage("Sorry, "+feature+" is only available in OverlayCamera PRO. The PRO version includes other nice features too.\nYou wanna take a look?")
+		builder.setMessage("Sorry, "+feature+" is only available in ClapCamera PRO. The PRO version includes other nice features too.\nYou wanna take a look?")
 		       .setCancelable(false)
 		       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
 		        	   FlurryAgent.logEvent("goProYes");
-		        	   String url = "http://play.google.com/store/apps/details?id=net.microtrash.overlaycamera";
+		        	   String url = "http://play.google.com/store/apps/details?id=net.microtrash.clapcamera";
 		        	   Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 		        	   activity.startActivity(browserIntent);
 		           }
@@ -85,7 +85,7 @@ public class DialogBuilder {
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		
-		builder.setMessage("Sorry! OverlayCamera did crash the last time :(\nI'm trying hard to improve the stability of the app, and feedback would help me a lot!")
+		builder.setMessage("Sorry! ClapCamera did crash the last time :(\nI'm trying hard to improve the stability of the app, and feedback would help me a lot!")
 		       .setCancelable(false)
 		       .setPositiveButton("Give Feedback", new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {

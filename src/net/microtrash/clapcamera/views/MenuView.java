@@ -1,5 +1,5 @@
 /*******************************************************************************
- * OverlayCamera
+ * ClapCamera
  *
  * Copyright 2013 by Stephan Petzl
  * http://www.stephanpetzl.com
@@ -17,12 +17,12 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package net.microtrash.overlaycamera.views;
+package net.microtrash.clapcamera.views;
 
 import java.util.ArrayList;
 
-import net.microtrash.overlaycamera.R;
-import net.microtrash.overlaycamera.Tools;
+import net.microtrash.clapcamera.R;
+import net.microtrash.clapcamera.Tools;
 
 
 import android.content.Context;
@@ -61,7 +61,7 @@ public class MenuView extends ViewGroup{
 	private ArrayList<IconButton> menuButtons;
 	// indicates if every button is positioned correctly
 	private boolean initialised = false;
-	private static String TAG = "OverlayCameraera";
+	private static String TAG = "ClapCameraera";
 	private Context context;
 	private ArrayList<CircleButton> modeButtons;
 	

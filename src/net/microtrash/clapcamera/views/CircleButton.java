@@ -1,5 +1,5 @@
 /*******************************************************************************
- * OverlayCamera
+ * ClapCamera
  *
  * Copyright 2013 by Stephan Petzl
  * http://www.stephanpetzl.com
@@ -17,10 +17,10 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package net.microtrash.overlaycamera.views;
+package net.microtrash.clapcamera.views;
 
 
-import net.microtrash.overlaycamera.Tools;
+import net.microtrash.clapcamera.Tools;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;

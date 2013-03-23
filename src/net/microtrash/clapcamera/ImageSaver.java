@@ -1,5 +1,5 @@
 /*******************************************************************************
- * OverlayCamera
+ * ClapCamera
  *
  * Copyright 2013 by Stephan Petzl
  * http://www.stephanpetzl.com
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package net.microtrash.overlaycamera;
+package net.microtrash.clapcamera;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -76,7 +76,7 @@ public class ImageSaver {
 		
 		
 		try {
-			String dir = Environment.getExternalStorageDirectory().getPath() + "/OverlayCamera/";
+			String dir = Environment.getExternalStorageDirectory().getPath() + "/ClapCamera/";
 			
 			
 			File noMedia = new File(dir+".nomedia"); // don't know why, but something created a .nomedia file in my dir. so make shure each time that it's not therere
@@ -114,11 +114,11 @@ public class ImageSaver {
 			}else{				
 				if(this.getDefaultImageFormat().equals("PNG")){
 					
-					this.lastCompositionPath = String.format(dir+"overlaycam_%d.png", System.currentTimeMillis());
+					this.lastCompositionPath = String.format(dir+"clapcam_%d.png", System.currentTimeMillis());
 					stream = new FileOutputStream(this.lastCompositionPath);
 					processedImage.compress(CompressFormat.PNG, 100, stream);
 				}else{ // this.imageFormat == "JPEG"
-					this.lastCompositionPath = String.format(dir+"overlaycam_%d.jpg", System.currentTimeMillis());
+					this.lastCompositionPath = String.format(dir+"clapcam_%d.jpg", System.currentTimeMillis());
 					stream = new FileOutputStream(this.lastCompositionPath);
 					processedImage.compress(CompressFormat.JPEG, this.imageQuality, stream);
 				}

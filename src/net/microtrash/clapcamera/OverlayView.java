@@ -1,5 +1,5 @@
 /*******************************************************************************
- * OverlayCamera
+ * ClapCamera
  *
  * Copyright 2013 by Stephan Petzl
  * http://www.stephanpetzl.com
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package net.microtrash.overlaycamera;
+package net.microtrash.clapcamera;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -36,7 +36,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 
-class OverlayView extends ImageView { // <1>
+class ClapView extends ImageView { // <1>
 
 	private Bitmap image = null;
 	private int displayWidth, displayHeight, offsetTop=0, offsetLeft=0;
@@ -44,7 +44,7 @@ class OverlayView extends ImageView { // <1>
 	private Paint whitePaint, whiteLinePaint;
 	private Paint transparentPaint, blackPaint, blackLinePaint, semiTransparentPaint;
 	private Paint dashedPaint;
-	private static String TAG = "Overlay";
+	private static String TAG = "Clap";
 	private boolean dirty = true;
 	private Canvas cacheCanvas;
 	private Bitmap cacheBitmap;
@@ -97,7 +97,7 @@ class OverlayView extends ImageView { // <1>
     	this.image = Bitmap.createBitmap(pictureWidth, pictureHeight, Bitmap.Config.ARGB_8888);
     }
     
-	public OverlayView(BaseCameraActivity context) {
+	public ClapView(BaseCameraActivity context) {
 		super(context);
 		super.setClickable(true);
 		this.context = context;
@@ -316,7 +316,7 @@ class OverlayView extends ImageView { // <1>
 		this.dirty = true;
 		this.invalidate();
 	}
-	public void setPreviewOverlay(Bitmap previewBitmap) {
+	public void setPreviewClap(Bitmap previewBitmap) {
 		this.previewBitmap = previewBitmap;
 		this.invalidate();
 	}

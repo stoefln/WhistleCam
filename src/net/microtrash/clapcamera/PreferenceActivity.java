@@ -1,5 +1,5 @@
 /*******************************************************************************
- * OverlayCamera
+ * ClapCamera
  *
  * Copyright 2013 by Stephan Petzl
  * http://www.stephanpetzl.com
@@ -17,9 +17,9 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package net.microtrash.overlaycamera;
+package net.microtrash.clapcamera;
 
-import net.microtrash.overlaycamera.R;
+import net.microtrash.clapcamera.R;
 import android.os.Bundle;
 
 public class PreferenceActivity extends android.preference.PreferenceActivity {

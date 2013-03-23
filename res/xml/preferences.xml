@@ -34,7 +34,7 @@
                         android:key="smoothPathPref" />
        
         <Preference
-                android:title="OverlayCamera v0.1"
+                android:title="ClapCamera v0.1"
                 android:summary="for feedback or feature requests contact me at stephan.petzl@gmail.com"
                 android:key="customPref" />
 </PreferenceScreen>

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * OverlayCamera
+ * ClapCamera
  *
  * Copyright 2013 by Stephan Petzl
  * http://www.stephanpetzl.com
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package net.microtrash.overlaycamera;
+package net.microtrash.clapcamera;
 
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
@@ -26,8 +26,8 @@ import java.io.InputStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.HashMap;
 
-import net.microtrash.overlaycamera.views.MenuView;
-import net.microtrash.overlaycamera.views.MenuViewCallback;
+import net.microtrash.clapcamera.views.MenuView;
+import net.microtrash.clapcamera.views.MenuViewCallback;
 
 
 import android.app.Activity;
@@ -69,13 +69,13 @@ public class BaseCameraActivity extends Activity implements MenuViewCallback,
 															PreviewCallback, 
 															UncaughtExceptionHandler{
 	public static final boolean dev = true;
-	public static final String TAG = "OverlayCameraera";
+	public static final String TAG = "ClapCameraera";
 	private Preview preview;
-	private OverlayView overlayView;
+	private ClapView clapView;
 	//private Display display;
 	private ImageSaver imageSaver;
 	protected RelativeLayout containerLayout;
-	private RelativeLayout overlayLayout;
+	private RelativeLayout clapLayout;
 	private RelativeLayout previewLayout;
 	private RelativeLayout menuLayout;
 	
@@ -136,15 +136,15 @@ public class BaseCameraActivity extends Activity implements MenuViewCallback,
 		previewLayout = new RelativeLayout(this);
 		previewLayout.setBackgroundColor(0x00808080);
 		
-		overlayLayout = new RelativeLayout(this);
-		overlayLayout.setBackgroundColor(0x00808080);
+		clapLayout = new RelativeLayout(this);
+		clapLayout.setBackgroundColor(0x00808080);
 		
 		RelativeLayout topLayout = new RelativeLayout(this);
 		topLayout.setBackgroundColor(0x00808080);
 		
 		
 		containerLayout.addView(previewLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-		containerLayout.addView(overlayLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+		containerLayout.addView(clapLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 		
 		menuView = new MenuView(this,this);
 		menuLayout = new RelativeLayout(this);
@@ -177,8 +177,8 @@ public class BaseCameraActivity extends Activity implements MenuViewCallback,
 	@Override
 	protected void onDestroy() {
 
-		if(overlayView != null){
-			overlayView.recycle();
+		if(clapView != null){
+			clapView.recycle();
 		}
 		imageSaver.getSensorImageRotator().disable();
 		super.onDestroy();
@@ -192,15 +192,15 @@ public class BaseCameraActivity extends Activity implements MenuViewCallback,
 		int workingImageWidth = pictureWidth / downscalingFactor;
 		int workingImageHeight = pictureHeight / downscalingFactor;
 		
-		if(overlayView == null){
+		if(clapView == null){
 
 			Log.v(TAG, offsetLeft+" "+offsetTop+" "+ previewWidth+" "+previewHeight+" "+workingImageWidth+" "+workingImageHeight);
 			imageToPortRatio = (double) pictureWidth / (double) downscalingFactor / (double) previewWidth;
-			overlayView = new OverlayView(this);
-			overlayView.init(offsetLeft, offsetTop, previewWidth, previewHeight, workingImageWidth, workingImageHeight);
-			overlayView.setDisplayMatrix(getDisplayMatrix());
-			overlayView.setImageToPortRatio(imageToPortRatio);
-			overlayLayout.addView(overlayView, new LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
+			clapView = new ClapView(this);
+			clapView.init(offsetLeft, offsetTop, previewWidth, previewHeight, workingImageWidth, workingImageHeight);
+			clapView.setDisplayMatrix(getDisplayMatrix());
+			clapView.setImageToPortRatio(imageToPortRatio);
+			clapLayout.addView(clapView, new LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
 			
 			
 			
@@ -228,7 +228,7 @@ public class BaseCameraActivity extends Activity implements MenuViewCallback,
 	private void loadImage(Uri imageUri, int workingImageWidth, int workingImageHeight){
 		Bitmap image; 
         try {  
-        	overlayView.beforeShoot();
+        	clapView.beforeShoot();
 			System.gc();
 			
 			// we have to downsample big images, otherwise we will get an OutOfMemoryException
@@ -254,12 +254,12 @@ public class BaseCameraActivity extends Activity implements MenuViewCallback,
 			options.inSampleSize = downSample;
             image = BitmapFactory.decodeByteArray(bMapArray, 0, bMapArray.length, options);
             Log.v(TAG, "downsampling image by: "+downSample);
-//overlayView.setLoadedImageBitmap(image);
-            overlayView.addLoadedImageBitmap(image);
+//clapView.setLoadedImageBitmap(image);
+            clapView.addLoadedImageBitmap(image);
         	menuView.doneButton.show();
         	menuView.switchLayersButton.show();
         	hideAndShowControlsCheck();
-        	overlayView.invalidate();
+        	clapView.invalidate();
         	
         } catch (FileNotFoundException e) {  
             e.printStackTrace(); 
@@ -423,7 +423,7 @@ public class BaseCameraActivity extends Activity implements MenuViewCallback,
 	private void shoot(){
 		try{
 			Log.v(TAG, "shoot()");
-			overlayView.beforeShoot();
+			clapView.beforeShoot();
 			HashMap<String, String> parameters = new HashMap<String,String>();
 			//parameters.put("pathNum", String.valueOf(pathManager.getPaths().size()));
 			Crittercism.leaveBreadcrumb("shoot()");
@@ -479,13 +479,13 @@ public class BaseCameraActivity extends Activity implements MenuViewCallback,
 				Toast.makeText(BaseCameraActivity.this, "OutOfMemoryError, please restart the app", Toast.LENGTH_LONG).show();
 				FlurryAgent.onError("3", "OutOfMemoryError, downsamplingFactor: "+options.inSampleSize+"", "decodeByteArrays");
 			}else{
-				float downsampling = overlayView.getComposition().getWidth() / photo.getWidth();
+				float downsampling = clapView.getComposition().getWidth() / photo.getWidth();
 				if(downsampling != 1){
 					Toast.makeText(BaseCameraActivity.this, "Compatibillity mode acitvated: Downsampled image by factor "+downsampling+" cause app is running on low memory.", Toast.LENGTH_LONG).show();
 				}
 				//touchView.resetMatrix();
-				overlayView.addBitmap(photo);
-				//overlayView.setLoadedImageBitmap(photo);
+				clapView.addBitmap(photo);
+				//clapView.setLoadedImageBitmap(photo);
 				saving = false;
 				hideAndShowControlsCheck();
 			
@@ -495,7 +495,7 @@ public class BaseCameraActivity extends Activity implements MenuViewCallback,
 				
 				stats.shotsTotal++; stats.shotsOfComposition++;
 			}
-			overlayView.invalidate();
+			clapView.invalidate();
 			
 			preview.camera.startPreview();
 		}
@@ -533,7 +533,7 @@ public class BaseCameraActivity extends Activity implements MenuViewCallback,
 		
 		hideAndShowControlsCheck();
 
-		this.overlayView.invalidate();
+		this.clapView.invalidate();
 
 	}
 
@@ -541,13 +541,13 @@ public class BaseCameraActivity extends Activity implements MenuViewCallback,
 	@Override
 	public void saveImageButtonClicked() {
 		
-		imageSaver.saveImage(overlayView.getComposition());
+		imageSaver.saveImage(clapView.getComposition());
 
 		HashMap<String, String> parameters = new HashMap<String,String>();
 		parameters.put("pathNum", String.valueOf(stats.shotsOfComposition));
 		parameters.put("degreesQuantized", ""+imageSaver.getSensorImageRotator().getDegreesQuantized());
 		parameters.put("defaultOrientation", ""+imageSaver.getSensorImageRotator().getDefaultDisplayOrientation());
-		parameters.put("imageSize", String.valueOf(overlayView.getComposition().getWidth()) + "x" + String.valueOf(overlayView.getComposition().getHeight()));
+		parameters.put("imageSize", String.valueOf(clapView.getComposition().getWidth()) + "x" + String.valueOf(clapView.getComposition().getHeight()));
 		parameters.put("imageFormat", imageSaver.getDefaultImageFormat());
 		FlurryAgent.logEvent("save",parameters);
 		
@@ -560,11 +560,11 @@ public class BaseCameraActivity extends Activity implements MenuViewCallback,
 	    FlurryAgent.logEvent("newImageButton", parameters);
 	    
 		
-		this.overlayView.clearView();
+		this.clapView.clearView();
 
 		
 		stats.shotsOfComposition = 0;
-		this.overlayView.invalidate();
+		this.clapView.invalidate();
 	}
 
 	@Override
@@ -616,7 +616,7 @@ public class BaseCameraActivity extends Activity implements MenuViewCallback,
 
 	@Override
 	public void switchMode(Mode mode) {
-		overlayView.switchMode(mode);
+		clapView.switchMode(mode);
 		menuView.shootButton.show();
 	}
 
@@ -640,7 +640,7 @@ public class BaseCameraActivity extends Activity implements MenuViewCallback,
 
 	@Override
 	public void switchLayersButtonClicked() {
-		overlayView.switchLayers();
+		clapView.switchLayers();
 	}
 
 
@@ -652,7 +652,7 @@ public class BaseCameraActivity extends Activity implements MenuViewCallback,
 
 	@Override
 	public void previewBitmapAvailable(Bitmap previewBitmap) {
-		overlayView.setPreviewOverlay(previewBitmap);
+		clapView.setPreviewClap(previewBitmap);
 	}
 
 }

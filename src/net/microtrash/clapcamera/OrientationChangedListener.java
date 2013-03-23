@@ -1,5 +1,5 @@
 /*******************************************************************************
- * OverlayCamera
+ * ClapCamera
  *
  * Copyright 2013 by Stephan Petzl
  * http://www.stephanpetzl.com
@@ -17,14 +17,8 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package net.microtrash.overlaycamera;
+package net.microtrash.clapcamera;
 
-import android.graphics.Bitmap;
-
-public interface PreviewCallback {
-	public void previewReady(int paddingLeft, int paddingTop, int previewWidth, int previewHeight, int pictureWidth, int pictureHeight, int downscalingFactor, String allResolutions);
-
-	public void onPreviewStart();
-
-	public void previewBitmapAvailable(Bitmap previewBitmap);
+public interface OrientationChangedListener {
+	public void orientationChanged(int newDegrees);
 }

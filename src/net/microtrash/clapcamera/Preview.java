@@ -1,7 +1,7 @@
-package net.microtrash.overlaycamera;
+package net.microtrash.clapcamera;
 
 /*******************************************************************************
- * OverlayCamera
+ * ClapCamera
  *
  * Copyright 2013 by Stephan Petzl
  * http://www.stephanpetzl.com
@@ -309,7 +309,7 @@ class Preview extends ViewGroup implements SurfaceHolder.Callback { // <1>
 		 * +this.getPreviewBottom()+" t:"+this.getPreviewTop());
 		 * child.layout(this.getPreviewLeft(), this.getPreviewTop(),
 		 * this.getPreviewRight(), this.getPreviewBottom());
-		 * cameraActivity.initOverlay
+		 * cameraActivity.initClap
 		 * (this.getPreviewLeft(),this.getPreviewTop(),
 		 * this.getPreviewRight(),this.getPreviewBottom()); }
 		 */
