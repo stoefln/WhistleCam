@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+        
+        <CheckBoxPreference
+                        android:title="Enable automatic focus"
+                        android:defaultValue="true"
+                        android:summary="Will force the cam to focus each 2 seconds automatically"
+                        android:key="autoFocusPref" 
+                        android:enabled="false"/>
+        <CheckBoxPreference
+                        android:title="Enable devLog"
+                        android:defaultValue="false"
+                        android:summary="Show debug info (for testing)"
+                        android:key="enableDevLog" 
+                        android:enabled="true"/>
+        <ListPreference
+                        android:title="Image format"
+                        android:summary="Choose a format for saving images (only available in CutoutCam Pro)"
+                        android:key="imageFormatPref"
+                        android:defaultValue="JPEG"
+                        android:entries="@array/format_titles"
+                        android:entryValues="@array/format_titles" />
+        <ListPreference
+                        android:title="JPEG quality"
+                        android:summary="Better quality for your images (only available in CutoutCam Pro)"
+                        android:key="imageQualityPref"
+                        android:defaultValue="70"
+                        android:entries="@array/quality_titles"
+                        android:entryValues="@array/quality_values" />
+        <CheckBoxPreference
+                        android:title="Enable smoothed paths"
+                        android:defaultValue="true"
+                        android:summary="Cut out paths will be smoothed"
+                        android:key="smoothPathPref" />
+       
+        <Preference
+                android:title="OverlayCamera v0.1"
+                android:summary="for feedback or feature requests contact me at stephan.petzl@gmail.com"
+                android:key="customPref" />
+</PreferenceScreen>

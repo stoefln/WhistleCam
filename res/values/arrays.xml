@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="quality_titles">
+        <item>High</item>
+	    <item>Medium</item>
+	    <item>Low</item>
+	</string-array>
+	<string-array  name="quality_values">
+	    <item>90</item>
+	    <item>70</item>
+	    <item>50</item>
+	</string-array>
+	<string-array name="format_titles">
+	    <item>JPEG</item>
+	    <item>PNG</item>
+	</string-array>
+	
+</resources>
