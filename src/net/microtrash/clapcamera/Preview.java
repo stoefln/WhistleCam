@@ -51,7 +51,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.crittercism.app.Crittercism;
-import com.flurry.android.FlurryAgent;
+
 
 /**
  * 
@@ -163,7 +163,7 @@ class Preview extends ViewGroup implements SurfaceHolder.Callback { // <1>
 						+ "; Model:" + Build.MODEL + "; Camera: " + this.camera
 						+ "; Stacktrace:" + Tools.exception2String(e);
 				Log.d(TAG, "error occured: " + errorMessage);
-				FlurryAgent.onError("1", errorMessage, "Preview.openCamera()");
+
 				Toast.makeText(
 						context,
 						"Uuups, I am sorry! Could not connect to the camera device. Please restart me or your phone.",

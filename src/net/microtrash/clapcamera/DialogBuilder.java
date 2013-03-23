@@ -22,7 +22,6 @@ package net.microtrash.clapcamera;
 import java.util.HashMap;
 
 import com.crittercism.NewFeedbackSpringboardActivity;
-import com.flurry.android.FlurryAgent;
 
 import net.microtrash.clapcamera.R;
 import android.app.Activity;
@@ -44,13 +43,11 @@ public class DialogBuilder {
 	public static AlertDialog getProFeatureDialog(final Activity activity, String feature){
 		HashMap<String, String> parameters = new HashMap<String,String>();
 		parameters.put("feature", feature);
-		FlurryAgent.logEvent("showProFeatureDialog",parameters);
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setMessage("Sorry, "+feature+" is only available in ClapCamera PRO. The PRO version includes other nice features too.\nYou wanna take a look?")
 		       .setCancelable(false)
 		       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
-		        	   FlurryAgent.logEvent("goProYes");
 		        	   String url = "http://play.google.com/store/apps/details?id=net.microtrash.clapcamera";
 		        	   Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 		        	   activity.startActivity(browserIntent);
@@ -59,7 +56,6 @@ public class DialogBuilder {
 		       })
 		       .setNegativeButton("Back", new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
-		        	   FlurryAgent.logEvent("goProCanceled");
 		        	   dialog.cancel();
 		           }
 		       }).setCancelable(true);
@@ -89,7 +85,6 @@ public class DialogBuilder {
 		       .setCancelable(false)
 		       .setPositiveButton("Give Feedback", new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
-		        	   FlurryAgent.logEvent("feedbackDialogYes");
 		        	   Intent i = new Intent(activity, NewFeedbackSpringboardActivity.class);
 		        	   activity.startActivity(i);
 		        	   dialog.cancel();
@@ -99,7 +94,6 @@ public class DialogBuilder {
 		       })
 		       .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
-		        	   FlurryAgent.logEvent("feedbackDialogCanceled");
 		        	   //restartDialog.show();
 		        	   dialog.cancel();
 		        	   Tools.restartActivity(activity);

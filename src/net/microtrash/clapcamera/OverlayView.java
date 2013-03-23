@@ -259,11 +259,11 @@ class ClapView extends ImageView { // <1>
 		if(this.dirty == true){
 			if (this.image != null) {
 	
-				cacheCanvas.drawBitmap(this.image, this.transformMatrix, this.whitePaint);
-				if(this.previewBitmap != null){
+				//cacheCanvas.drawBitmap(this.image, this.transformMatrix, this.whitePaint);
+				/*if(this.previewBitmap != null){
 					previewTransferPaint.setXfermode(new PorterDuffXfermode(this.getMode()));
 					cacheCanvas.drawBitmap(this.previewBitmap, this.displayMatrix, previewTransferPaint);
-				}
+				}*/
 				
 			}
 			Paint paint = new Paint();
@@ -316,7 +316,7 @@ class ClapView extends ImageView { // <1>
 		this.dirty = true;
 		this.invalidate();
 	}
-	public void setPreviewClap(Bitmap previewBitmap) {
+	public void setPreviewImage(Bitmap previewBitmap) {
 		this.previewBitmap = previewBitmap;
 		this.invalidate();
 	}

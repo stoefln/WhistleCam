@@ -78,6 +78,8 @@ public class ImageSaver {
 		try {
 			String dir = Environment.getExternalStorageDirectory().getPath() + "/ClapCamera/";
 			
+			File directory = new File(dir);
+			directory.mkdirs();
 			
 			File noMedia = new File(dir+".nomedia"); // don't know why, but something created a .nomedia file in my dir. so make shure each time that it's not therere
 			noMedia.delete();
