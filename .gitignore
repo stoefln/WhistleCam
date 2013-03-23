@@ -1,0 +1,7 @@
+/gen
+/bin
+library-projects/SlidingMenu/gen
+library-projects/SlidingMenu/bin
+library-projects/google-play-services_lib/gen
+library-projects/google-play-services_lib/gen
+.DS_Store
